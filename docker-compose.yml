@@ -1,0 +1,19 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # Define the backup service
+  backup-runner:
+    # Build the Docker image from the Dockerfile in the current directory
+    build: .
+    container_name: backup_runner
+    # This policy ensures the container restarts automatically when the machine boots up
+    restart: unless-stopped
+    volumes:
+      # Mount the local backups directory to the container to persist backups on the host
+      - ./backups:/app/backups
+      # Mount the cron log file for easy access from the host
+      - ./cron.log:/var/log/cron.log
+    # Load environment variables from the .env file in the current directory
+    env_file:
+      - ./.env

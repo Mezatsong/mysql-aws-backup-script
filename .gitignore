@@ -1,0 +1,15 @@
+# Ignore environment file containing sensitive credentials
+.env
+
+# Ignore Composer's dependencies directory
+/vendor/
+
+# Ignore the directory where backups are stored
+/backups/
+
+# Ignore the cron log file
+/cron.log
+
+# Ignore Docker-related files that might be specific to a local setup
+.dockerignore
+docker-compose.override.yml
