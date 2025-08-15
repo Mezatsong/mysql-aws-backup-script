@@ -18,6 +18,7 @@ try {
         'AWS_BUCKET',
 
         'DB_HOST',
+        'DB_PORT',
         'DB_USERNAME',
         'DB_PASSWORD',
         'DB_DATABASE',
@@ -91,8 +92,9 @@ function backupDatabase($backupDir)
     echo "Backing up database '" . env('DB_DATABASE') . "'...\n";
     $backupFile = $backupDir . '/' . env('DB_DATABASE') . '.sql.gz';
     $command = sprintf(
-        'mysqldump -h %s -u %s -p%s %s | gzip > %s',
+        'mysqldump --skip-ssl -h %s -P %s -u %s -p%s %s | gzip > %s',
         escapeshellarg(env('DB_HOST')),
+        escapeshellarg(env('DB_PORT')),
         escapeshellarg(env('DB_USERNAME')),
         escapeshellarg(env('DB_PASSWORD')),
         escapeshellarg(env('DB_DATABASE')),
